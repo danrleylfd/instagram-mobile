@@ -33,7 +33,7 @@ export default class Feed extends Component {
     }
 
     registerToSocket = () => {
-        const socket = io('https://insta-back-gram.herokuapp.com')
+        const socket = io(process.env.API_URL)
 
         socket.on('post', newPost => {
             this.setState({ feed: [newPost, ...this.state.feed] })
@@ -67,7 +67,7 @@ export default class Feed extends Component {
                                 </View>
                                 <Image source={more} />
                             </View>
-                            <Image style={styles.feedImage} source={{ uri: `https://insta-back-gram.herokuapp.com/files/${item.image}` }} />
+                            <Image style={styles.feedImage} source={{ uri: `${process.env.API_URL}/files/${item.image}` }} />
                             <View style={styles.feedItemFooter}>
                                 <View style={styles.actions}>
                                     <TouchableOpacity style={styles.action} onPress={() => this.handleLike(item._id)}>
